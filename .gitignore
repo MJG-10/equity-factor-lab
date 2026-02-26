@@ -1,0 +1,33 @@
+# Python cache / build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# IDE / OS artifacts
+.vs/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Local data and outputs (generated during research runs)
+outputs/
+notebooks/.ipynb_checkpoints/
+
+# Tooling caches
+.mypy_cache/
+.ruff_cache/
