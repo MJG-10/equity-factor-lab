@@ -1,4 +1,4 @@
-# factor-model
+# Equity Factor Lab
 
 In this project we implement a walk-forward research workflow for a simple cross-sectional equity factor strategy on SimFin US data. We compare a small set of weekly rebalanced strategy variants in pre-holdout validation and then carry one selected strategy variant into holdout with point-in-time investability filters and trading costs.
 
