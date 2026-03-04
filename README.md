@@ -10,10 +10,10 @@ The objective is to test whether a simple factor mix still performs out of sampl
 - **Prediction target**: cross-sectional forward stock returns after the score date.
 - **Evaluation**: Spearman IC for rank quality and long/short decile backtests after costs.
 - **Timing convention**: scores at date `t` are evaluated on forward returns after `t`; for weekly `W-FRI` evaluation, returns are computed using prices at rebalance dates.
-- **Experiment design**: load data from `2007-01-01` so the first design date in `2008` starts with fully formed long-lookback factors; compare strategy variants on two expanding pre-holdout folds, using `2014-2016` and `2017-2019` as validation windows; then carry one selected strategy variant into holdout from `2020-01-01`, with a scheduled re-estimation at `2023-01-01`.`
+- **Experiment design**: load data from `2007-01-01` so the first design date in `2008` starts with fully formed long-lookback factors; compare strategy variants on two expanding pre-holdout folds, using `2014-2016` and `2017-2019` as validation windows; then carry one selected strategy variant into holdout from `2020-01-01`, with a scheduled re-estimation at `2023-01-01`.
 - **Factor set**: `momentum`, `reversal`, `low_vol`, `value`, `quality`, `invest`, and `growth`.
-- **Processing**: cross sectional winsorization (1% / 99%), \ `sector` neutralization in the notebook run, and cross-sectional standardization.
-- **Universe / eligibility**: price floor, point-in-time liquidity and data-quality filters, score availability, and a top-\ 1500` point-in-time universe cap by lagged average daily dollar volume (ADV).`
+- **Processing**: cross-sectional winsorization (1% / 99%), `sector` neutralization in the notebook run, and cross-sectional standardization.
+- **Universe / eligibility**: price floor, point-in-time liquidity and data-quality filters, score availability, and a top-`1500` point-in-time universe cap by lagged average daily dollar volume (ADV).
 - **Candidate strategy variants**: `EW__ALL`, `EW__DROP_STABLY_NEGATIVE`, and `RIDGE__ALL`.
 - **Equal-weight screening rule**: `EW__DROP_STABLY_NEGATIVE` removes only factors that are negative on full-train IC and on both train halves.
 - **Ridge implementation**: `RIDGE__ALL` uses a rolling window of `156` weekly rebalances (about 3 years), refits every `12` rebalances, and selects alpha from `(0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0)` by train-window mean IC.
@@ -30,9 +30,9 @@ The installable package `equity_factor_lab` provides the reusable pipeline, fact
 
 **Illustrative findings from the current saved notebook run:**
 
-- The pooled pre-holdout comparison between the two equal-weight strategy variants is close: `EW__DROP_STABLY_NEGATIVE` is slightly better on IC, but `EW__ALL` is sslightly better on net Sharpe and drawdown, so `EW__ALL` is carried into holdout.
+- The pooled pre-holdout comparison between the two equal-weight strategy variants is close: `EW__DROP_STABLY_NEGATIVE` is slightly better on IC, but `EW__ALL` is slightly better on net Sharpe and drawdown, so `EW__ALL` is carried into holdout.
 - `RIDGE__ALL` is the clear weak link: it trails both equal-weight strategy variants in both folds and is worst on pooled IC, net Sharpe, and drawdown.
-- In holdout, `EW__ALL` stays positive in both `2020-2022` and `2023+`; but the overall result is modest and still marked by large drawdowns.
+- In holdout, `EW__ALL` stays positive in both `2020-2022` and `2023+`, but the overall result is modest and still marked by large drawdowns.
 
 ## Installation
 
@@ -120,4 +120,4 @@ pytest -q
 ## Identifier policy
 
 - SimFinId is the canonical asset identifier for joins and panel alignment.
-- `PipelineSettings.market_simfin_id` is the benchmark SimFinId used by `market` neutralization.
+- `PipelineSettings.market_simfin_id` is the benchmark SimFinId used for `market` neutralization.
