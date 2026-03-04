@@ -21,11 +21,14 @@ env/
 .vs/
 .vscode/
 .idea/
+*.pyproj
+*.sln
 Thumbs.db
 .DS_Store
 
 # Local data and outputs (generated during research runs)
 outputs/
+simfin_data/
 notebooks/.ipynb_checkpoints/
 
 # Tooling caches
