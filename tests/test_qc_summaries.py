@@ -27,12 +27,12 @@ def test_summarize_factor_panels_uses_coverage_base_mask() -> None:
     assert row["factor"] == "factor_a"
     assert row["non_null_frac"] == 0.5
     assert row["date_coverage_p50"] == 0.5
-    assert row["ticker_coverage_p50"] == 0.0
+    assert row["stock_coverage_p50"] == 0.0
     assert set(qc.columns) == {
         "factor",
         "non_null_frac",
         "date_coverage_p50",
-        "ticker_coverage_p50",
+        "stock_coverage_p50",
         "value_p01",
         "value_p99",
     }

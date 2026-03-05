@@ -41,7 +41,7 @@ def _summarize_factor_panel(
             "factor": name,
             "non_null_frac": np.nan,
             "date_coverage_p50": np.nan,
-            "ticker_coverage_p50": np.nan,
+            "stock_coverage_p50": np.nan,
             "value_p01": np.nan,
             "value_p99": np.nan,
         }
@@ -58,17 +58,17 @@ def _summarize_factor_panel(
     covered = panel.notna() & base_mask
     non_null_count = float(covered.sum(axis=1).sum())
     date_base = base_mask.sum(axis=1).astype(float)
-    ticker_base = base_mask.sum(axis=0).astype(float)
+    stock_base = base_mask.sum(axis=0).astype(float)
     date_valid = covered.sum(axis=1).astype(float)
-    ticker_valid = covered.sum(axis=0).astype(float)
+    stock_valid = covered.sum(axis=0).astype(float)
     date_coverage = date_valid.div(date_base.replace(0.0, np.nan))
-    ticker_coverage = ticker_valid.div(ticker_base.replace(0.0, np.nan))
+    stock_coverage = stock_valid.div(stock_base.replace(0.0, np.nan))
 
     return {
         "factor": name,
         "non_null_frac": float(non_null_count / n_cells),
         "date_coverage_p50": _safe_quantile(date_coverage, 0.50),
-        "ticker_coverage_p50": _safe_quantile(ticker_coverage, 0.50),
+        "stock_coverage_p50": _safe_quantile(stock_coverage, 0.50),
         "value_p01": value_p01,
         "value_p99": value_p99,
     }
