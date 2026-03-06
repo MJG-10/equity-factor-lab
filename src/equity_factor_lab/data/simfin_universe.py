@@ -11,7 +11,7 @@ def load_company_universe_simfin_ids(
     api_key: str | None = None,
     data_dir: str | Path | None = None,
     market: str = "us",
-    refresh_days: int = 30,
+    refresh_days: int = 0,
 ) -> list[int]:
     """Loads a broad SimFinId universe from SimFin company metadata."""
     configure_simfin(api_key=api_key, data_dir=data_dir)
@@ -33,7 +33,7 @@ def load_sector_map(
     api_key: str | None = None,
     data_dir: str | Path | None = None,
     market: str = "us",
-    refresh_days: int = 30,
+    refresh_days: int = 0,
 ) -> pd.Series:
     """Loads a SimFinId-to-sector mapping from SimFin company metadata."""
     configure_simfin(api_key=api_key, data_dir=data_dir)

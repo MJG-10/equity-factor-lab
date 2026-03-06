@@ -184,7 +184,7 @@ def load_universe_signals(
     end: str | None = None,
     api_key: str | None = None,
     data_dir: str | Path | None = None,
-    refresh_days: int = 30,
+    refresh_days: int = 0,
     publish_shift_business_days: int = 1,
 ) -> pd.DataFrame:
     """

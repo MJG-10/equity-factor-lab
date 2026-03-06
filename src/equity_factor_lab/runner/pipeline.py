@@ -49,7 +49,8 @@ class PipelineSettings:
     borrow_cost_rate_annual: float = 0.0
     simfin_api_key: str | None = None
     simfin_data_dir: str | None = None
-    simfin_refresh_days: int = 30
+    # SimFin cache refresh window in days; 0 refreshes every run.
+    simfin_refresh_days: int = 0
     simfin_publish_shift_business_days: int = 1
     universe_max_tickers: int | None = None
     dynamic_universe_adv_lookback: int = 63
