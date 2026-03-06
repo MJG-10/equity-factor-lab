@@ -97,15 +97,10 @@ def compute_ic_stats(
 
 def compute_performance_stats(equity_curve: pd.Series, trading_days_per_year: int = 252) -> dict:
     """
-    Computes standard performance statistics from an equity curve.
-
-    Annual return is computed as CAGR when both start/end equity are positive.
-    Sharpe is computed from annualized daily return mean and volatility.
+    Computes annualized volatility, Sharpe, and max drawdown from an equity curve.
     """
     if equity_curve.empty:
         return {
-            "total_return": np.nan,
-            "annual_return": np.nan,
             "annual_vol": np.nan,
             "sharpe": np.nan,
             "max_drawdown": np.nan,
@@ -113,15 +108,7 @@ def compute_performance_stats(equity_curve: pd.Series, trading_days_per_year: in
 
     daily_ret = equity_curve.pct_change().dropna()
 
-    start_value = float(equity_curve.iloc[0])
-    end_value = float(equity_curve.iloc[-1])
-    total_return = np.nan if start_value == 0.0 else (end_value / start_value) - 1.0
-
     n_periods = int(len(daily_ret))
-    annual_return = np.nan
-    if n_periods > 0 and start_value > 0.0 and end_value > 0.0:
-        annual_return = (end_value / start_value) ** (trading_days_per_year / n_periods) - 1.0
-
     avg_daily = float(daily_ret.mean()) if n_periods > 0 else np.nan
     std_daily = float(daily_ret.std(ddof=1)) if n_periods > 1 else np.nan
 
@@ -136,8 +123,6 @@ def compute_performance_stats(equity_curve: pd.Series, trading_days_per_year: in
     max_drawdown = drawdown.min()
 
     return {
-        "total_return": float(total_return),
-        "annual_return": float(annual_return),
         "annual_vol": float(annual_vol),
         "sharpe": float(sharpe),
         "max_drawdown": float(max_drawdown),
