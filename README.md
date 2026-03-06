@@ -70,6 +70,7 @@ pip install -e ".[dev,notebook]"
 $env:SIMFIN_API_KEY = "your_simfin_key"
 ```
 
+- End-to-end pipeline runs and notebook reruns require a SimFin API key and SimFin Basic access.
 - Repo-local data cache defaults to `simfin_data/` via `src/equity_factor_lab/config.py`.
 - Runtime settings live in `src/equity_factor_lab/runner/pipeline.py` on the `PipelineSettings` dataclass.
 - The convenience script in `src/equity_factor_lab/runner/run_pipeline.py` is an example configuration; the results notebook has its own explicit settings.
