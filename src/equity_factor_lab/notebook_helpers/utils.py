@@ -43,7 +43,11 @@ def window_metrics(
             rebalance_freq=rebalance_freq,
             prices=prices,
         )
-        ic_series = compute_ic_series(ic_scores, ic_future_returns, min_assets=ic_min_assets)
+        ic_series = compute_ic_series(
+            ic_scores,
+            ic_future_returns,
+            min_assets=ic_min_assets,
+        )
         ic_stats = compute_ic_stats(ic_series)
     else:
         ic_stats = {"mean_ic": np.nan, "t_newey_west": np.nan, "n_obs": 0.0}

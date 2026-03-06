@@ -321,7 +321,11 @@ def score_alpha_on_pre_holdout(
     """Scores one alpha by pre-holdout mean IC and observation count."""
     pred_pre = prediction_panel[prediction_panel.index.isin(pre_dates)]
     target_pre = target_panel.reindex(index=pred_pre.index, columns=pred_pre.columns)
-    ic = compute_ic_series(pred_pre, target_pre, min_assets=min_assets)
+    ic = compute_ic_series(
+        pred_pre,
+        target_pre,
+        min_assets=min_assets,
+    )
     if len(ic) == 0:
         return np.nan, 0
     return float(ic.mean()), int(len(ic))

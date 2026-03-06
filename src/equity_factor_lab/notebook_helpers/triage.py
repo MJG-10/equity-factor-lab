@@ -64,7 +64,7 @@ def build_train_factor_report(
             prices=train_prices,
         )
 
-        ic_s = compute_ic_series(ic_scores, ic_fwd, method="spearman", min_assets=ic_min_assets)
+        ic_s = compute_ic_series(ic_scores, ic_fwd, min_assets=ic_min_assets)
         ic_stats = compute_ic_stats(ic_s)
         mean_ic = float(ic_stats["mean_ic"]) if pd.notna(ic_stats["mean_ic"]) else float("nan")
 

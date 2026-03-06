@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from equity_factor_lab.metrics import compute_performance_stats
+from equity_factor_lab.metrics import compute_ic_series, compute_performance_stats
 
 
 def test_compute_performance_stats_uses_cagr_and_daily_sharpe() -> None:
@@ -48,3 +48,20 @@ def test_compute_performance_stats_sets_annual_return_nan_when_end_non_positive(
 
     assert np.isnan(stats["annual_return"])
     assert stats["total_return"] == pytest.approx(-1.1)
+
+
+def test_compute_ic_series_uses_spearman_rank_correlation() -> None:
+    scores = pd.DataFrame(
+        [[1.0, 2.0, 3.0, 4.0]],
+        index=[pd.Timestamp("2020-01-01")],
+        columns=["A", "B", "C", "D"],
+    )
+    future_returns = pd.DataFrame(
+        [[1.0, 8.0, 27.0, 64.0]],
+        index=scores.index,
+        columns=scores.columns,
+    )
+
+    ic = compute_ic_series(scores, future_returns, min_assets=2)
+
+    assert ic.iloc[0] == pytest.approx(1.0)

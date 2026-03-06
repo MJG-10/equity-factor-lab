@@ -5,16 +5,15 @@ import numpy as np
 def compute_ic_series(
     scores: pd.DataFrame,
     future_returns: pd.DataFrame,
-    method: str = "pearson",
     min_assets: int = 50,
 ) -> pd.Series:
-    """Computes date-level cross-sectional IC series."""
+    """Computes date-level cross-sectional Spearman IC series."""
     scores, future_returns = scores.align(future_returns, join="inner")
 
     valid = scores.notna() & future_returns.notna()
     n_valid = valid.sum(axis=1)
 
-    ic = scores.corrwith(future_returns, axis=1, method=method)
+    ic = scores.corrwith(future_returns, axis=1, method="spearman")
     ic = ic.where(n_valid >= min_assets).dropna()
 
     return ic
