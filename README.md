@@ -34,40 +34,41 @@ The installable package `equity_factor_lab` provides the reusable pipeline, fact
 - `RIDGE__ALL` is the clear weak link: it trails both equal-weight strategy variants in both folds and is worst on pooled IC, net Sharpe, and drawdown.
 - In holdout, `EW__ALL` stays positive in both `2020-2022` and `2023+`, but the overall result is modest and still marked by large drawdowns.
 
-## Installation
-
-From the repository root:
-
-**Standard install**
+## Quickstart
 
 ```bash
-pip install -e .
+git clone https://github.com/MJG-10/equity-factor-lab.git
+cd equity-factor-lab
+python -m venv .venv
 ```
 
-**Notebook dependencies**
+**Activate the virtual environment**
 
-```bash
-pip install -e ".[notebook]"
+```powershell
+. .\.venv\Scripts\Activate.ps1
 ```
 
-**Test tooling**
-
 ```bash
-pip install -e ".[dev]"
+source .venv/bin/activate
 ```
 
-**Notebook + test tooling**
+**Install**
 
 ```bash
-pip install -e ".[dev,notebook]"
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev,notebook]"
 ```
 
 ## Configuration
 
-- Set your SimFin API key in the environment:
+- Set your SimFin API key before running the pipeline or rerunning the notebook.
 
 ```powershell
 $env:SIMFIN_API_KEY = "your_simfin_key"
+```
+
+```bash
+export SIMFIN_API_KEY="your_simfin_key"
 ```
 
 - End-to-end pipeline runs and notebook reruns require a SimFin API key and SimFin Basic access.
@@ -83,7 +84,7 @@ $env:SIMFIN_API_KEY = "your_simfin_key"
 
    Path: `src/equity_factor_lab/runner/pipeline.py`
 
-2. **Convenience script**
+2. **Run the provided pipeline script**
 
 ```bash
 python -m equity_factor_lab.runner.run_pipeline
