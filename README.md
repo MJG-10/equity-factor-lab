@@ -84,7 +84,11 @@ export SIMFIN_API_KEY="your_simfin_key"
 
    Path: `src/equity_factor_lab/runner/pipeline.py`
 
-2. **Run the provided pipeline script**
+2. **Provided pipeline script**
+
+   Path: `src/equity_factor_lab/runner/run_pipeline.py`
+
+   This file contains one example pipeline configuration. You can also run it directly from the terminal:
 
 ```bash
 python -m equity_factor_lab.runner.run_pipeline
